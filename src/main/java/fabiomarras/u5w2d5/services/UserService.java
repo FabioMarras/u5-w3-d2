@@ -1,5 +1,6 @@
 package fabiomarras.u5w2d5.services;
 
+import fabiomarras.u5w2d5.Enum.Role;
 import fabiomarras.u5w2d5.entities.Dispositivo;
 import fabiomarras.u5w2d5.entities.User;
 import fabiomarras.u5w2d5.exceptions.NotFoundException;
@@ -53,6 +54,7 @@ public class UserService {
             newUser.setLastName(body.lastName());
             newUser.setEmail(body.email());
             newUser.setPassword(body.password());
+            newUser.setRole(Role.USER);
             User saveUser = userRepository.save(newUser);
             return saveUser;
     }

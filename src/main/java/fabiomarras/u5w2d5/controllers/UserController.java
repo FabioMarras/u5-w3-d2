@@ -7,6 +7,8 @@ import fabiomarras.u5w2d5.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -56,4 +58,19 @@ public class UserController {
         userService.findByIdAndDelete(id);
     }
 
+    @GetMapping("/me")
+    public UserDetails getMyProfile(@AuthenticationPrincipal User currentUser){
+        return currentUser;
+    }
+
+    @PutMapping("/me")
+    public UserDetails getProfile(@AuthenticationPrincipal User currentUser, @RequestBody NewUserRequestDTO body){
+        return userService.findByIdAndUpdate(currentUser.getId(), body);
+    }
+
+    @DeleteMapping("/me")
+    @ResponseStatus(HttpStatus.NO_CONTENT) // <-- 204 NO CONTENT
+    public void getProfile(@AuthenticationPrincipal User currentUser){
+        userService.findByIdAndDelete(currentUser.getId());
+    };
 }

@@ -41,9 +41,9 @@ public class ExceptionsHandler {
     public NewUserRequestDTO handleBadRequest(BadRequestException e) {
         if (e.getErrorsList() != null) {
             List<String> errorsList = e.getErrorsList().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();
-            return new NewUserRequestDTO(e.getMessage(), null, null,null, null, null, null, errorsList);
+            return new NewUserRequestDTO(e.getMessage(), null, null,null, null, null, null, null, errorsList);
         } else {
-            return new NewUserRequestDTO(e.getMessage(), null, null, null, null, null, null, new ArrayList<>());
+            return new NewUserRequestDTO(e.getMessage(), null, null, null, null, null, null, null, new ArrayList<>());
         }
     }
 

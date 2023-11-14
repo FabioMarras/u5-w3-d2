@@ -1,5 +1,6 @@
 package fabiomarras.u5w2d5.payloads;
 
+import fabiomarras.u5w2d5.Enum.Role;
 import fabiomarras.u5w2d5.entities.Dispositivo;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -23,6 +24,7 @@ public record NewUserRequestDTO(
         String email,
         String avatar,
         String password,
+        Role role,
         List<Dispositivo> dispositivo,
 
         List<String> errorsList
