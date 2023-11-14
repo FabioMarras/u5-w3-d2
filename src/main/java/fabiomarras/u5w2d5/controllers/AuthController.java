@@ -23,6 +23,7 @@ public class AuthController {
     @Autowired
     UserService userService;
 
+
     @PostMapping("/login")
     public UserLoginSuccessDTO login(@RequestBody UserLoginDTO body){
 
@@ -34,7 +35,7 @@ public class AuthController {
         if(validation.hasErrors()){
             throw new BadRequestException(validation.getAllErrors());
         } else {
-            return userService.save(body);
+            return authService.save(body);
         }
     }
 }

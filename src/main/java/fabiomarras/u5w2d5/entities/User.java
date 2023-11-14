@@ -1,6 +1,7 @@
 package fabiomarras.u5w2d5.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import fabiomarras.u5w2d5.Enum.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -17,6 +18,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
+@JsonIgnoreProperties({"password"})
 public class User implements UserDetails {
     @Id
     @GeneratedValue

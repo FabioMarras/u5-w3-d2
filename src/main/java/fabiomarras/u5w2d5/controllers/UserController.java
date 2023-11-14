@@ -3,6 +3,8 @@ package fabiomarras.u5w2d5.controllers;
 import fabiomarras.u5w2d5.entities.User;
 import fabiomarras.u5w2d5.exceptions.BadRequestException;
 import fabiomarras.u5w2d5.payloads.NewUserRequestDTO;
+import fabiomarras.u5w2d5.repositories.UserRepository;
+import fabiomarras.u5w2d5.services.AuthService;
 import fabiomarras.u5w2d5.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,6 +26,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private AuthService authService;
+
 
     @GetMapping("")
     public Page<User> getAllUser(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String orderBy){
@@ -42,7 +47,7 @@ public class UserController {
         if (validation.hasErrors()) {
             throw new BadRequestException(validation.getAllErrors());
         } else {
-            return userService.save(body);
+            return authService.save(body);
         }
     }
 

@@ -46,18 +46,6 @@ public class UserService {
         return userRepository.findByEmail(email).orElseThrow(()-> new NotFoundException(email));
     }
 
-    //POST /user - crea uno user
-    public User save(@RequestBody NewUserRequestDTO body){
-            User newUser = new User();
-            newUser.setUsername(body.username());
-            newUser.setName(body.name());
-            newUser.setLastName(body.lastName());
-            newUser.setEmail(body.email());
-            newUser.setPassword(body.password());
-            newUser.setRole(Role.USER);
-            User saveUser = userRepository.save(newUser);
-            return saveUser;
-    }
 
     //PUT /user/id - modifica uno user specifico
     public User findByIdAndUpdate(int id,@RequestBody NewUserRequestDTO body){
