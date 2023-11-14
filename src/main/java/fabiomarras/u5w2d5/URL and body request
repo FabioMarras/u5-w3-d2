@@ -1,0 +1,15 @@
+--------FOR THE USER---------
+GET ALL USERS:    http://localhost:3002/users
+GET USER FROM ID: http://localhost:3002/users/IdUser
+PUT USER FROM ID: http://localhost:3002/users/IdUser
+POST USER:        http://localhost:3002/users
+DELETE USER:      http://localhost:3002/users/IdUser
+UPLOAD FILE:      http://localhost:3002/users/upload
+
+
+--------FOR THE DISPOSITIVO---------
+GET ALL DISPOSITIVI:     http://localhost:3002/dispositivi
+GET DISPOSITIVO FROM ID: http://localhost:3002/dispositivi/IdDipositivo
+PUT DISPOSITIVO FROM ID: http://localhost:3002/dispositivi/IdDipositivo?userId=IdUser
+POST DISPOSITIVO:        http://localhost:3002/dispositivi
+DELETE DISPOSITIVO:      http://localhost:3002/dispositivi/IdDipositivo
