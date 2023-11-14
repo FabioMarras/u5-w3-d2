@@ -1,5 +1,6 @@
 package fabiomarras.u5w2d5.security;
 
+import fabiomarras.u5w2d5.exceptions.ExceptionsHandlerFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,9 @@ public class SecurityConfig {
     @Autowired
     JWTAuthFilter jwtAuthFilter;
 
+    @Autowired
+    ExceptionsHandlerFilter exceptionsHandlerFilter;
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
@@ -25,6 +29,7 @@ public class SecurityConfig {
 
         // Aggiugo filtri custom
         http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(exceptionsHandlerFilter, JWTAuthFilter.class);
 
         // Aggiungo/rimuovo protezione sui singoli endpoint in maniera che venga/non venga richiesta l'autenticazione per accedervi
         http.authorizeHttpRequests(request -> request.requestMatchers("/**").permitAll());

@@ -7,6 +7,7 @@ import fabiomarras.u5w2d5.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
@@ -36,6 +37,7 @@ public class UserController {
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAuthority('ADMIN')")
     public User saveNewUser(@RequestBody @Validated NewUserRequestDTO body, BindingResult validation) throws IOException{
         if (validation.hasErrors()) {
             throw new BadRequestException(validation.getAllErrors());
@@ -45,6 +47,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public User findByIdAndUpdate(@PathVariable int id, @RequestBody @Validated NewUserRequestDTO body, BindingResult validation) throws IOException {
         if (validation.hasErrors()) {
             throw new BadRequestException(validation.getAllErrors());
@@ -54,6 +57,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void findByIdAndDelete(@PathVariable int id){
         userService.findByIdAndDelete(id);
     }
